@@ -4,8 +4,12 @@ project(LabProj)
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
 set (CMAKE_PREFIX_PATH "/Users/ned/Qt/5.7/clang_64/lib/cmake/Qt5Widgets/")
 
+add_subdirectory(test)
+
 find_package(Qt5Widgets REQUIRED)
 
 set(SOURCE_FILES main.cpp LoadResources.h LoadResources.cpp)
-add_executable(LabProj ${SOURCE_FILES})
-target_link_libraries(LabProj Qt5::Widgets)
+add_executable(LabProj main.cpp)
+add_library(core ${SOURCE_FILES})
+target_link_libraries(core Qt5::Widgets)
+target_link_libraries(LabProj core)

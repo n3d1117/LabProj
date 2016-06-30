@@ -15,6 +15,7 @@ public:
     virtual ~LoadResources();
     void setProgressBarValue(int value);
     void showProgressBar();
+    int getProgressBarValue();
 
 private:
     QProgressBar *progressBar;

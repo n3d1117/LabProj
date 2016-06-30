@@ -26,5 +26,11 @@ void LoadResources::showProgressBar() {
     progressBar->show();
 }
 
+int LoadResources::getProgressBarValue() {
+    return progressBar->value();
+}
+
+
+
 
 
