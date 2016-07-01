@@ -1,6 +1,8 @@
 #include <iostream>
-//#include <QApplication>
-#include "LoadResources.h"
+#include <QVBoxLayout>
+#include <QPushButton>
+#include <QApplication>
+#include "MainWindow.h"
 
 using namespace std;
 
@@ -8,10 +10,8 @@ int main(int argc, char *argv[]) {
 
     QApplication app(argc, argv);
 
-    LoadResources load;
-    load.setProgressBarValue(75);
-    load.getProgressBarValue();
-    load.showProgressBar();
+    MainWindow mainWindow;
+    mainWindow.show();
 
     return app.exec();
 

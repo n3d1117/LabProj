@@ -7,18 +7,19 @@
 
 #include <QApplication>
 #include <QProgressBar>
+#include <QTimer>
+#include <iostream>
+#include "File.h"
+
+using namespace std;
 
 class LoadResources {
-
 public:
-    LoadResources();
-    virtual ~LoadResources();
-    void setProgressBarValue(int value);
-    void showProgressBar();
-    int getProgressBarValue();
-
+    LoadResources(QProgressBar* bar);
+    void load(std::vector<const char*> filenames) throw(runtime_error);
+    void handleFile(const char* itr);
 private:
-    QProgressBar *progressBar;
+    QProgressBar * pBar;
 };
 
 
