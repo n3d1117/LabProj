@@ -11,7 +11,7 @@ add_subdirectory(test)
 
 find_package(Qt5Widgets REQUIRED)
 
-set(SOURCE_FILES main.cpp LoadResources.h LoadResources.cpp File.h File.cpp MainWindow.h MainWindow.cpp LabProj.pro)
+set(SOURCE_FILES main.cpp LoadResources.h LoadResources.cpp File.h File.cpp MainWindow.h MainWindow.cpp)
 add_executable(LabProj main.cpp)
 add_library(core ${SOURCE_FILES})
 target_link_libraries(core Qt5::Widgets)

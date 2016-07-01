@@ -14,9 +14,16 @@ class File {
 public:
     explicit File(const char* filename);
     ~File();
-    void write(const char* str);
+
+    //void write(const char* str);
+
+    int getSizeInBytes() const {
+        return sizeInBytes;
+    }
+
 private:
-    std::FILE* file;
+    int sizeInBytes;
+    FILE* file;
 };
 
 

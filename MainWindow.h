@@ -8,6 +8,8 @@
 #include <QMainWindow>
 #include <QPushButton>
 #include <QProgressBar>
+#include <QTextEdit>
+#include <QLabel>
 
 namespace Ui {
     class MainWindow;
@@ -22,6 +24,10 @@ private slots:
 private:
     QPushButton * m_button;
     QProgressBar * progressBar;
+    QTextEdit * text;
+    QLabel * linkToGitHub;
+    QLabel * title;
+    QLabel * name;
 };
 
 
