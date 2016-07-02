@@ -50,7 +50,6 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent) {
 
 void MainWindow::loadResources() {
 
-    m_button->setText("Loading...");
     text->setText("---> Ready to load resources!\n");
 
     LoadResources loader(progressBar, text, m_button);

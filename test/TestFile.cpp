@@ -5,7 +5,7 @@
 #include "gtest/gtest.h"
 #include "../File.h"
 
-TEST(TestFile, testNonExistentFile) {
+TEST(TestFile, testNonExistentResource) {
     ASSERT_THROW(File file("../resources/non_existing_file.jpg"), runtime_error);
 }
 

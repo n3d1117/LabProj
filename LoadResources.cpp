@@ -46,7 +46,7 @@ void LoadResources::handleFile(const char * itr) {
 
         cerr << e.what() << endl << endl;
 
-        //Update Tex Log
+        //Update Text Log
         QString text = QString("❌ Could not load file '") + itr + "'.\n";
         log->append(text);
 
@@ -62,6 +62,3 @@ void LoadResources::updateButtonText() {
     QString percentText = QString::number(pBar->value() / 10) + QString("% resources loaded!");
     pButton->setText(percentText);
 }
-
-
-

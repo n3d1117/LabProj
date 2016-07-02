@@ -27,8 +27,3 @@ File::~File() {
         cout << "Did successfully write " << str << " to file." << endl;
     }
 }*/
-
-
-
-
-

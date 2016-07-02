@@ -11,10 +11,6 @@
 #include <QTextEdit>
 #include <QLabel>
 
-namespace Ui {
-    class MainWindow;
-}
-
 class MainWindow : public QMainWindow  {
     Q_OBJECT
 public:
@@ -25,6 +21,7 @@ private:
     QPushButton * m_button;
     QProgressBar * progressBar;
     QTextEdit * text;
+
     QLabel * linkToGitHub;
     QLabel * title;
     QLabel * name;
