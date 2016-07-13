@@ -19,11 +19,3 @@ File::~File() {
         throw runtime_error("Failed to close file");
     }
 }
-
-/*void File::write(const char *str) {
-    if (EOF == std::fputs(str, file)) {
-        throw runtime_error("Could not write to file!");
-    } else {
-        cout << "Did successfully write " << str << " to file." << endl;
-    }
-}*/
