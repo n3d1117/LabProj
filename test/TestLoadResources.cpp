@@ -7,13 +7,17 @@
 
 TEST(TestLoadResources, testNoFileNamesProvided) {
 
-    int test = 0;
-    QApplication app(test, NULL);
+    std::vector<const char*> vector;
+    LoadResources loader;
+    loader.load(vector);
+    ASSERT_EQ(loader.getNumberOfResources(), 0);
+}
+
+TEST(TestLoadResources, fileNamesProvided) {
 
     std::vector<const char*> vector;
-    QProgressBar * bar = new QProgressBar();
-    QTextEdit * text = new QTextEdit();
-    QPushButton * button = new QPushButton();
-    LoadResources loader(bar, text, button);
-    ASSERT_EQ(loader.getNumberOfResources(), 0);
+    vector.push_back("anything");
+    LoadResources loader;
+    loader.load(vector);
+    ASSERT_FALSE(loader.getNumberOfResources()==0);
 }

@@ -14,7 +14,7 @@ class File {
 public:
     explicit File(const char* filename);
     ~File();
-    
+
     int getSizeInBytes() const {
         return sizeInBytes;
     }

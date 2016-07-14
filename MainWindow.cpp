@@ -5,9 +5,10 @@
 #include <QDesktopWidget>
 #include <QPainter>
 #include "MainWindow.h"
-#include "LoadResources.h"
 
-MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent) {
+MainWindow::MainWindow(LoadResources *resources_, QWidget *parent) : QMainWindow(parent), resources(resources_) {
+
+    resources->registerObserver(this);
 
     this->setWindowTitle("Esercizio - Laboratorio di Programmazione - 2016");
     this->setFixedSize(QSize(600, 400));
@@ -44,15 +45,39 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent) {
     c.movePosition(QTextCursor::End);
     text->setTextCursor(c);
 
+    progressBar->setMinimum(0);
+    progressBar->setMaximum(1000);
+    progressBar->setValue(0);
+
     // Connect button signal to appropriate slot
     connect(m_button, SIGNAL (released()), this, SLOT (loadResources()));
 }
+
+void MainWindow::update() {
+
+    //Update Text Log
+    if (resources->didLoadFile()) {
+
+        //Update Progress Bar Percentage
+        progressBar->setValue(progressBar->value() + (1000/resources->getNumberOfResources()));
+        QString log = "✅ Loaded file '" + QString(resources->getFilename()) + QString("' successfully (") + QString::number(resources->getFilesize()) + QString(" bytes).") + "\n";
+        text->append(log);
+
+        //Update Button Text
+        QString percentText = QString::number(progressBar->value() / 10) + QString("% resources loaded!");
+        m_button->setText(percentText);
+
+    } else {
+        QString log = "❌ Could not load file '" + resources->getFilename();
+        text->append(log);
+    }
+
+};
 
 void MainWindow::loadResources() {
 
     text->setText("---> Ready to load resources!\n");
 
-    LoadResources loader(progressBar, text, m_button);
     vector<const char*> filenames;
 
     filenames.push_back("resources/flower.jpg");
@@ -65,6 +90,6 @@ void MainWindow::loadResources() {
     filenames.push_back("resources/sample.txt");
     filenames.push_back("resources/hi.mp3");
 
-    loader.load(filenames);
+    resources->load(filenames);
 
 }

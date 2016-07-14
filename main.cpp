@@ -10,7 +10,9 @@ int main(int argc, char *argv[]) {
 
     QApplication app(argc, argv);
 
-    MainWindow mainWindow;
+    LoadResources loader;
+
+    MainWindow mainWindow(&loader);
     mainWindow.show();
 
     return app.exec();

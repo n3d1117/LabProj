@@ -4,10 +4,21 @@
 
 #include "LoadResources.h"
 
-LoadResources::LoadResources(QProgressBar* bar, QTextEdit * text, QPushButton * button) : numberOfResources(0), pBar(bar), log(text), pButton(button) {
-    bar->setMinimum(0);
-    bar->setMaximum(1000);
-    bar->setValue(0);
+LoadResources::LoadResources() : numberOfResources(0) {
+}
+
+void LoadResources::registerObserver(Observer *o) {
+    observers.push_back(o);
+}
+
+void LoadResources::removeObserver(Observer *o) {
+    observers.remove(o);
+}
+
+void LoadResources::notifyObservers() const {
+    for (const auto &itr : observers) {
+        itr->update();
+    }
 }
 
 void LoadResources::load(std::vector<const char *> filenames) throw(runtime_error) {
@@ -19,7 +30,6 @@ void LoadResources::load(std::vector<const char *> filenames) throw(runtime_erro
         }
     } catch(runtime_error& e) {
         cerr << e.what() << endl;
-        pButton->setText("No resources provided.");
     }
 
     for (auto& itr : filenames) {
@@ -32,33 +42,20 @@ void LoadResources::handleFile(const char * itr) {
 
         File file(itr);
 
-        //Update Progress Bar Percentage
-        pBar->setValue(pBar->value() + (1000/numberOfResources));
-
-        //Update Text Log
-        QString text = "✅ Loaded file '" + QString(itr) + QString("' successfully (") + QString::number(file.getSizeInBytes()) + QString(" bytes).") + "\n";
-        log->append(text);
-
-        //Update Button Text
-        updateButtonText();
+        filename = QString(itr);
+        filesize = file.getSizeInBytes();
+        loaded = true;
+        notifyObservers();
 
     } catch(runtime_error& e) {
 
         cerr << e.what() << endl << endl;
 
-        //Update Text Log
-        QString text = QString("❌ Could not load file '") + itr + "'.\n";
-        log->append(text);
-
-        //Update Button Text
-        updateButtonText();
+        filename = QString(itr);
+        loaded = false;
+        notifyObservers();
 
     } catch(...) {
         cerr << "Unknown exception caught!" << endl;
     }
-}
-
-void LoadResources::updateButtonText() {
-    QString percentText = QString::number(pBar->value() / 10) + QString("% resources loaded!");
-    pButton->setText(percentText);
 }
