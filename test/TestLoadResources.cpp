@@ -6,7 +6,6 @@
 #include "../LoadResources.h"
 
 TEST(TestLoadResources, testNoFileNamesProvided) {
-
     std::vector<const char*> vector;
     LoadResources loader;
     loader.load(vector);

@@ -55,11 +55,12 @@ MainWindow::MainWindow(LoadResources *resources_, QWidget *parent) : QMainWindow
 
 void MainWindow::update() {
 
-    //Update Text Log
     if (resources->didLoadFile()) {
 
         //Update Progress Bar Percentage
         progressBar->setValue(progressBar->value() + (1000/resources->getNumberOfResources()));
+
+        //Update text log
         QString log = "✅ Loaded file '" + QString(resources->getFilename()) + QString("' successfully (") + QString::number(resources->getFilesize()) + QString(" bytes).") + "\n";
         text->append(log);
 
@@ -68,6 +69,8 @@ void MainWindow::update() {
         m_button->setText(percentText);
 
     } else {
+
+        //Update text log
         QString log = "❌ Could not load file '" + resources->getFilename();
         text->append(log);
     }
